@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#
+# Run `kubectl get` on all the contexts found in your `.kube/config`.
+
 [[ -n $DEBUG ]] && set -x
 
 set -eou pipefail
