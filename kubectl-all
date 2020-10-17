@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Run `kubectl get` on all the contexts found in your `.kube/config`.
+# Run 'kubectl' commands on contexts in your kubeconfig
 
 [[ -n $DEBUG ]] && set -x
 
@@ -15,8 +15,15 @@ usage() {
   fi
 
   cat <<EOF
-USAGE:
-  $SELF get [(-o|--output=)json|yaml|wide|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=...] (--like name) (TYPE[.VERSION][.GROUP] [NAME | -l label] | TYPE[.VERSION][.GROUP]/NAME ...) [flags] [options]
+Usage:
+  # get all pods from all contexts
+  $ kubectl all get pods
+
+  # get all pods that have 'app' in their names from all contexts
+  $ kubectl all [--like app] get pods 
+
+  # apply configuration to all contexts
+  $ kubectl all apply -f deployment.yaml
 EOF
 }
 
@@ -38,18 +45,18 @@ main() {
     exit_err "kubectl is not installed"
   fi
 
-  if [[ "$#" -eq 0 ]]; then
+  if [[ "$#" -eq 0 || "$1" == "-h" || "$1" == "--help" ]]; then
     usage
     exit 1
   fi
 
-  # allow only the 'get' command
-  if [[ "${@#get}" = "$@" ]]; then
-    exit_err "get is the only command supported"
-  fi
-
   ARGS=${@:1}
   NAME=''
+  IS_GET=false
+
+  if [[ "${@#get}" != "$@" ]]; then
+    IS_GET=true
+  fi
 
   # check '--like' flag
   while [[ $# -gt 0 ]]
@@ -70,13 +77,13 @@ main() {
   # reconstruct args
   ARGS=( $(xargs -n 1 <<<"$ARGS") )
 
-  # run provided kubectl command for all the contexts
+  # run provided kubectl command on all contexts
   for context in $(get_contexts)
   do
     tput setaf 1
     echo -e "\nContext: $context"
     tput sgr0
-    if [[ -n $NAME ]]; then
+    if [[ "$IS_GET" = true && -n $NAME ]]; then
       $KUBECTL --context=$context ${ARGS[@]} | grep $NAME || [[ $? == 1 ]]
     else
       $KUBECTL --context=$context ${ARGS[@]} || [[ $? == 1 ]]

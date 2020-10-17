@@ -1,8 +1,20 @@
 # kall: `kubectl` without context switch
 
-Run `kubectl get` on all the contexts found in your `.kube/config`.
+Run 'kubectl' commands on contexts in your kubeconfig
 
 ## Usage
+
+### `apply`
+
+```bash
+$ kubectl all apply -f deployment.yaml
+
+Context: north-america
+deployment.apps/awesome-deployment created
+
+Context: west-europe
+deployment.apps/awesome-deployment created
+```
 
 ### `get pods`
 
