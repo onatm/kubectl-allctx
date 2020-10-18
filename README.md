@@ -1,4 +1,4 @@
-# kall: `kubectl` without context switch
+# kubectl-allctx: `kubectl` without context switch
 
 Run 'kubectl' commands on contexts in your kubeconfig
 
@@ -7,7 +7,7 @@ Run 'kubectl' commands on contexts in your kubeconfig
 ### `apply`
 
 ```bash
-$ kubectl forall apply -f deployment.yaml
+$ kubectl allctx apply -f deployment.yaml
 
 Context: north-america
 deployment.apps/awesome-deployment created
@@ -19,7 +19,7 @@ deployment.apps/awesome-deployment created
 ### `get pods`
 
 ```bash
-$ kubectl forall get pods
+$ kubectl allctx get pods
 
 Context: north-america
 NAME                                READY   STATUS    RESTARTS   AGE
@@ -35,7 +35,7 @@ awesome-resources-777564df5d-dcl4w   1/1     Running   0          105d
 awesome-web-6449f64fcd-pgphp         1/1     Running   0          105d
 grafana-9c57bcc66-f7t9w              2/2     Running   0          74d
 
-$ kubectl forall get pods --like app
+$ kubectl allctx get pods --like app
 
 Context: north-america
 awesome-app-68d74656c5-rzt2z         1/1     Running   0          108d
@@ -47,7 +47,7 @@ awesome-app-d7fb8dc96-6w22g          1/1     Running   0          105d
 ### `get deploy`
 
 ```bash
-$ kubectl forall get deploy
+$ kubectl allctx get deploy
 
 Context: north-america
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
@@ -63,7 +63,7 @@ awesome-resources   1/1     1            1           105d
 awesome-web         1/1     1            1           105d
 grafana             1/1     1            1           74d
 
-$ kubectl forall get deploy --like grafana
+$ kubectl allctx get deploy --like grafana
 
 Context: north-america
 grafana             1/1     1            1           74d
@@ -75,7 +75,7 @@ grafana             1/1     1            1           74d
 ### `get pv`
 
 ```bash
-$ kubectl forall get pv
+$ kubectl allctx get pv
 
 Context: north-america
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                         STORAGECLASS   REASON   AGE
@@ -92,17 +92,17 @@ etc.
 
 ### Manual
 
-You should be able to install `kubectl-forall` in any POSIX environment where `Bash` is installed.
+You should be able to install `kubectl-allctx` in any POSIX environment where `Bash` is installed.
 
-- Download `kubectl-forall`.
+- Download `kubectl-allctx`.
 - Either:
   - save it to somewhere in your `PATH`,
-  - or save it to a directory, then create a symlink to `kubectl-forall` from somewhere in your `PATH`, like `/usr/local/bin`
-- Make `kubectl-forall` executable (`chmod +x kubectl-forall`)
+  - or save it to a directory, then create a symlink to `kubectl-allctx` from somewhere in your `PATH`, like `/usr/local/bin`
+- Make `kubectl-allctx` executable (`chmod +x kubectl-allctx`)
 
 #### Example installation
 
 ``` bash
-sudo git clone https://github.com/onatm/kall /opt/kall
-sudo ln -s /opt/kall/kubectl-forall /usr/local/bin/kubectl-forall
+sudo git clone https://github.com/onatm/kubectl-allctx /opt/kall
+sudo ln -s /opt/kall/kubectl-allctx /usr/local/bin/kubectl-allctx
 ```

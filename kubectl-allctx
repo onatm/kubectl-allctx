@@ -9,21 +9,21 @@ IFS=$'\n\t'
 
 usage() {
   local SELF
-  SELF="kubectl-forall"
+  SELF="kubectl-allctx"
   if [[ "$(basename "$0")" == kubectl-* ]]; then # invoked as plugin
-    SELF="kubectl forall"
+    SELF="kubectl allctx"
   fi
 
   cat <<EOF
 Usage:
   # get all pods from all contexts
-  $ kubectl forall get pods
+  $ kubectl allctx get pods
 
   # get all pods that have 'app' in their names from all contexts
-  $ kubectl forall [--like app] get pods 
+  $ kubectl allctx [--like app] get pods 
 
   # apply configuration to all contexts
-  $ kubectl forall apply -f deployment.yaml
+  $ kubectl allctx apply -f deployment.yaml
 EOF
 }
 
