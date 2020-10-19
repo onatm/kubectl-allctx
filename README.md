@@ -90,6 +90,14 @@ etc.
 
 ## Installation
 
+### Kubectl Plugins (macOS and Linux)
+
+You can install and use [Krew](https://github.com/kubernetes-sigs/krew/) kubectl plugin manager to get `kubectl-all`.
+
+```bash
+kubectl krew install allctx
+```
+
 ### Manual
 
 You should be able to install `kubectl-allctx` in any POSIX environment where `Bash` is installed.
@@ -102,7 +110,7 @@ You should be able to install `kubectl-allctx` in any POSIX environment where `B
 
 #### Example installation
 
-``` bash
+```bash
 sudo git clone https://github.com/onatm/kubectl-allctx /opt/kall
 sudo ln -s /opt/kall/kubectl-allctx /usr/local/bin/kubectl-allctx
 ```
